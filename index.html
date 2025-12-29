@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>প্রাইভেট কনটেন্ট এক্সেস</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+/* PAGE */
+body{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  padding:80px 26px;
+}
+
+/* BACKGROUND (SMOOTH FADE + HEAVY BLUR) */
+.bg{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  filter: blur(32px) brightness(0.35) saturate(0.85);
+  transform:scale(1.25);
+  transition:opacity 2.2s ease-in-out;
+  z-index:-2;
+}
+
+.bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+}
+
+#bg1{opacity:1;}
+#bg2{opacity:0;}
+
+/* MAIN BOX */
+.box{
+  width:78%;
+  max-width:320px;
+  background:rgba(0,0,0,.68);
+  padding:44px 26px;
+  border-radius:24px;
+  text-align:center;
+  box-shadow:0 28px 60px rgba(0,0,0,.85);
+  animation:fadeUp .8s ease;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* TEXT */
+h1{
+  font-size:1.85rem;
+  margin-bottom:14px;
+}
+
+p{
+  font-size:.95rem;
+  color:#ddd;
+  margin-bottom:22px;
+  line-height:1.6;
+}
+
+/* PREVIEW */
+.preview{
+  background:#0d0d0d;
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:22px;
+  border:1px solid #222;
+}
+
+.preview span{
+  display:block;
+  font-size:.9rem;
+  color:#bbb;
+  margin-bottom:8px;
+}
+
+.preview-box{
+  height:120px;
+  border-radius:14px;
+  background:url('preview/preview1.jpg') center/cover no-repeat;
+  filter: blur(8px) brightness(0.7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#eee;
+  font-size:.85rem;
+}
+
+/* WARNING */
+.warning{
+  font-size:.9rem;
+  color:#cfcfcf;
+  margin-bottom:22px;
+  line-height:1.5;
+}
+
+/* BUTTONS */
+.cta{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:50px;
+  background:#00d084;
+  color:#000;
+  font-size:1rem;
+  font-weight:700;
+  cursor:pointer;
+  margin-bottom:12px;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+
+.cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(0,0,0,.4);
+}
+
+.exit{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:50px;
+  background:#333;
+  color:#bbb;
+  font-size:.95rem;
+  cursor:pointer;
+}
+
+.exit:hover{
+  background:#444;
+}
+
+/* MOBILE */
+@media(max-width:480px){
+  body{padding:70px 20px;}
+  .box{
+    width:88%;
+    max-width:300px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND LAYERS -->
+<div class="bg" id="bg1"></div>
+<div class="bg" id="bg2"></div>
+
+<!-- CONTENT -->
+<div class="box">
+
+  <h1>🔥 প্রিমিয়াম প্রাইভেট কনটেন্ট 🔥</h1>
+
+  <p>
+    এখানে রয়েছে এক্সক্লুসিভ ও নির্বাচিত প্রিমিয়াম কনটেন্ট।  
+    ভেতরে প্রবেশের আগে বয়স নিশ্চিত করা আবশ্যক।
+  </p>
+
+  <div class="preview">
+    <span>👁️ প্রিভিউ (ব্লার করা)</span>
+    <div class="preview-box">
+      বয়স নিশ্চিত করার পর প্রিভিউ দেখা যাবে
+    </div>
+  </div>
+
+  <div class="warning">
+    ⚠️ এই কনটেন্ট শুধুমাত্র <strong>১৮ বছর বা তার বেশি বয়সীদের জন্য</strong>।
+  </div>
+
+  <!-- REAL BUTTONS -->
+  <button class="cta" onclick="go()">🟢 আমি ১৮+ নিশ্চিত করছি</button>
+  <button class="exit" onclick="exitPage()">⬛ এখান থেকে বের হন</button>
+
+</div>
+
+<script>
+/* BACKGROUND IMAGES */
+const images = [
+  "bg/picture1.jpg",
+  "bg/picture2.jpg",
+  "bg/picture3.jpg"
+];
+
+let index = 0;
+let active = 1;
+
+const bg1 = document.getElementById("bg1");
+const bg2 = document.getElementById("bg2");
+
+bg1.style.backgroundImage = `url('${images[0]}')`;
+
+function changeBackground(){
+  const next = images[index % images.length];
+
+  if(active === 1){
+    bg2.style.backgroundImage = `url('${next}')`;
+    bg2.style.opacity = 1;
+    bg1.style.opacity = 0;
+    active = 2;
+  }else{
+    bg1.style.backgroundImage = `url('${next}')`;
+    bg1.style.opacity = 1;
+    bg2.style.opacity = 0;
+    active = 1;
+  }
+  index++;
+}
+setInterval(changeBackground, 6000);
+
+/* PREVIEW IMAGE CHANGE */
+const previews = [
+  "preview/preview1.jpg",
+  "preview/preview2.jpg"
+];
+let p = 0;
+const previewBox = document.querySelector(".preview-box");
+setInterval(()=>{
+  previewBox.style.backgroundImage = `url('${previews[p]}')`;
+  p = (p + 1) % previews.length;
+},4000);
+
+/* CTA REDIRECT */
+function go(){
+  window.location.href = "https://www.effectivegatecpm.com/gmm2vw204?key=694ab3a014ec97ea8dbfa22086cc8d5c";
+}
+
+/* EXIT BUTTON */
+function exitPage(){
+  window.location.href = "https://www.effectivegatecpm.com/qf5vkzxfg?key=70f467273b308353465cecd9d264d990";
+}
+</script>
+
+</body>
+</html>
