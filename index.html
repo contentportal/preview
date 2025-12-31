@@ -3,249 +3,184 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>প্রাইভেট কনটেন্ট এক্সেস</title>
+<title>Premium Access - 18+</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, Helvetica, sans-serif;
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
 }
 
-/* PAGE */
-body{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#fff;
-  position:relative;
-  overflow:hidden;
-  padding:80px 26px;
+/* Background Layers */
+.bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(40px) brightness(0.3);
+    transform: scale(1.2);
+    transition: opacity 2s ease-in-out;
+    z-index: -2;
+}
+#bg1 { opacity: 1; background-image: url('bg/picture1.jpg'); }
+#bg2 { opacity: 0; }
+
+/* Premium Glass Box */
+.box {
+    width: 90%;
+    max-width: 360px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    padding: 35px 25px;
+    border-radius: 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.9);
+    animation: fadeIn 1s ease;
 }
 
-/* BACKGROUND (SMOOTH FADE + HEAVY BLUR) */
-.bg{
-  position:absolute;
-  inset:0;
-  background-size:cover;
-  background-position:center;
-  filter: blur(32px) brightness(0.35) saturate(0.85);
-  transform:scale(1.25);
-  transition:opacity 2.2s ease-in-out;
-  z-index:-2;
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Headers */
+h1 { font-size: 1.6rem; color: #fff; margin-bottom: 15px; letter-spacing: 1px; }
+.live-tag {
+    background: #ff0050;
+    color: #fff;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    animation: blink 1.5s infinite;
+}
+@keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+/* Video Preview Wrapper */
+.preview-container {
+    background: rgba(0,0,0,0.5);
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.preview-box {
+    height: 140px;
+    border-radius: 15px;
+    background: url('preview/preview1.jpg') center/cover;
+    filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: #fff;
+    position: relative;
+}
+.play-icon { font-size: 40px; color: rgba(255,255,255,0.8); position: absolute; }
+
+/* Stats */
+.stats { font-size: 12px; color: #00d084; margin-bottom: 20px; font-weight: bold; }
+
+/* Buttons */
+.cta {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #00d084, #009961);
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 208, 132, 0.4);
+    transition: 0.3s;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 10px 25px rgba(0, 208, 132, 0.4); }
+    50% { transform: scale(1.03); box-shadow: 0 15px 35px rgba(0, 208, 132, 0.6); }
+    100% { transform: scale(1); box-shadow: 0 10px 25px rgba(0, 208, 132, 0.4); }
 }
 
-.bg::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.35);
+.exit {
+    background: transparent;
+    color: #888;
+    margin-top: 15px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
-#bg1{opacity:1;}
-#bg2{opacity:0;}
-
-/* MAIN BOX */
-.box{
-  width:78%;
-  max-width:320px;
-  background:rgba(0,0,0,.68);
-  padding:44px 26px;
-  border-radius:24px;
-  text-align:center;
-  box-shadow:0 28px 60px rgba(0,0,0,.85);
-  animation:fadeUp .8s ease;
-}
-
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* TEXT */
-h1{
-  font-size:1.85rem;
-  margin-bottom:14px;
-}
-
-p{
-  font-size:.95rem;
-  color:#ddd;
-  margin-bottom:22px;
-  line-height:1.6;
-}
-
-/* PREVIEW */
-.preview{
-  background:#0d0d0d;
-  border-radius:16px;
-  padding:14px;
-  margin-bottom:22px;
-  border:1px solid #222;
-}
-
-.preview span{
-  display:block;
-  font-size:.9rem;
-  color:#bbb;
-  margin-bottom:8px;
-}
-
-.preview-box{
-  height:120px;
-  border-radius:14px;
-  background:url('preview/preview1.jpg') center/cover no-repeat;
-  filter: blur(8px) brightness(0.7);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#eee;
-  font-size:.85rem;
-}
-
-/* WARNING */
-.warning{
-  font-size:.9rem;
-  color:#cfcfcf;
-  margin-bottom:22px;
-  line-height:1.5;
-}
-
-/* BUTTONS */
-.cta{
-  width:100%;
-  padding:16px;
-  border:none;
-  border-radius:50px;
-  background:#00d084;
-  color:#000;
-  font-size:1rem;
-  font-weight:700;
-  cursor:pointer;
-  margin-bottom:12px;
-  transition:transform .15s ease, box-shadow .15s ease;
-}
-
-.cta:hover{
-  transform:translateY(-2px);
-  box-shadow:0 10px 22px rgba(0,0,0,.4);
-}
-
-.exit{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:50px;
-  background:#333;
-  color:#bbb;
-  font-size:.95rem;
-  cursor:pointer;
-}
-
-.exit:hover{
-  background:#444;
-}
-
-/* MOBILE */
-@media(max-width:480px){
-  body{padding:70px 20px;}
-  .box{
-    width:88%;
-    max-width:300px;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND LAYERS -->
 <div class="bg" id="bg1"></div>
 <div class="bg" id="bg2"></div>
 
-<!-- CONTENT -->
 <div class="box">
+    <div class="live-tag">● LIVE</div>
+    <h1>প্রিমিয়াম এক্সেস</h1>
+    
+    <p style="font-size: 14px; color: #bbb; margin-bottom: 20px;">
+        আপনার রিকোয়েস্ট করা ভিডিওটি লোড হয়েছে। এটি দেখার জন্য নিচের বাটনে ক্লিক করে ভেরিফাই করুন।
+    </p>
 
-  <h1>🔥 প্রিমিয়াম প্রাইভেট কনটেন্ট 🔥</h1>
-
-  <p>
-    এখানে রয়েছে এক্সক্লুসিভ ও নির্বাচিত প্রিমিয়াম কনটেন্ট।  
-    ভেতরে প্রবেশের আগে বয়স নিশ্চিত করা আবশ্যক।
-  </p>
-
-  <div class="preview">
-    <span>👁️ প্রিভিউ (ব্লার করা)</span>
-    <div class="preview-box">
-      বয়স নিশ্চিত করার পর প্রিভিউ দেখা যাবে
+    <div class="preview-container">
+        <div class="preview-box">
+            <i class="fas fa-play-circle play-icon"></i>
+            <span style="z-index: 1;">প্রিভিউ লোড হচ্ছে...</span>
+        </div>
     </div>
-  </div>
 
-  <div class="warning">
-    ⚠️ এই কনটেন্ট শুধুমাত্র <strong>১৮ বছর বা তার বেশি বয়সীদের জন্য</strong>।
-  </div>
+    <div class="stats">
+        <i class="fas fa-users"></i> বর্তমানে ১৮,৪২০ জন অনলাইনে আছেন
+    </div>
 
-  <!-- REAL BUTTONS -->
-  <button class="cta" onclick="go()">🟢 আমি ১৮+ নিশ্চিত করছি</button>
-  <button class="exit" onclick="exitPage()">⬛ এখান থেকে বের হন</button>
+    <button class="cta" onclick="go()">🔓 কন্টেন্ট আনলক করুন</button>
+    <button class="exit" onclick="exitPage()">এখান থেকে ফিরে যান</button>
 
+    <div style="margin-top: 20px; font-size: 10px; color: #666;">
+        <i class="fas fa-shield-alt"></i> ১০০% নিরাপদ ও এনক্রিপ্টেড সংযোগ
+    </div>
 </div>
 
 <script>
-/* BACKGROUND IMAGES */
-const images = [
-  "bg/picture1.jpg",
-  "bg/picture2.jpg",
-  "bg/picture3.jpg"
-];
+/* Background Switcher */
+const images = ["bg/picture1.jpg", "bg/picture2.jpg", "bg/picture3.jpg"];
+let index = 0, active = 1;
+const bg1 = document.getElementById("bg1"), bg2 = document.getElementById("bg2");
 
-let index = 0;
-let active = 1;
+setInterval(() => {
+    const next = images[++index % images.length];
+    if(active === 1) {
+        bg2.style.backgroundImage = `url('${next}')`;
+        bg2.style.opacity = 1; bg1.style.opacity = 0; active = 2;
+    } else {
+        bg1.style.backgroundImage = `url('${next}')`;
+        bg1.style.opacity = 1; bg2.style.opacity = 0; active = 1;
+    }
+}, 5000);
 
-const bg1 = document.getElementById("bg1");
-const bg2 = document.getElementById("bg2");
-
-bg1.style.backgroundImage = `url('${images[0]}')`;
-
-function changeBackground(){
-  const next = images[index % images.length];
-
-  if(active === 1){
-    bg2.style.backgroundImage = `url('${next}')`;
-    bg2.style.opacity = 1;
-    bg1.style.opacity = 0;
-    active = 2;
-  }else{
-    bg1.style.backgroundImage = `url('${next}')`;
-    bg1.style.opacity = 1;
-    bg2.style.opacity = 0;
-    active = 1;
-  }
-  index++;
-}
-setInterval(changeBackground, 6000);
-
-/* PREVIEW IMAGE CHANGE */
-const previews = [
-  "preview/preview1.jpg",
-  "preview/preview2.jpg"
-];
-let p = 0;
-const previewBox = document.querySelector(".preview-box");
-setInterval(()=>{
-  previewBox.style.backgroundImage = `url('${previews[p]}')`;
-  p = (p + 1) % previews.length;
-},4000);
-
-/* CTA REDIRECT */
-function go(){
-  window.location.href = "https://www.effectivegatecpm.com/gmm2vw204?key=694ab3a014ec97ea8dbfa22086cc8d5c";
+/* Direct Link */
+function go() {
+    window.location.href = "YOUR_ADSTERRA_LINK_HERE";
 }
 
-/* EXIT BUTTON */
-function exitPage(){
-  window.location.href = "https://www.effectivegatecpm.com/qf5vkzxfg?key=70f467273b308353465cecd9d264d990";
+function exitPage() {
+    window.location.href = "https://www.facebook.com/";
 }
 </script>
 
